@@ -663,14 +663,7 @@ export function validateYupSchema<T extends FormikValues>(
   sync: boolean = false,
   context: any = {}
 ): Promise<Partial<T>> {
-  let validateData: Partial<T> = {};
-  for (let k in values) {
-    if (values.hasOwnProperty(k)) {
-      const key = String(k);
-      validateData[key] = values[key] !== '' ? values[key] : undefined;
-    }
-  }
-  return schema[sync ? 'validateSync' : 'validate'](validateData, {
+  return schema[sync ? 'validateSync' : 'validate'](values, {
     abortEarly: false,
     context: context,
   });
