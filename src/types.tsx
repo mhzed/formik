@@ -102,7 +102,7 @@ export interface FormikActions<Values> {
   /** Reset form */
   resetForm(nextValues?: any): void;
   /** Submit the form imperatively */
-  submitForm(): void;
+  submitForm(): void | Promise<void>;
   /** Set Formik state, careful! */
   setFormikState<K extends keyof FormikState<Values>>(
     f: (
@@ -199,7 +199,10 @@ export interface FormikConfig<Values> extends FormikSharedConfig {
   /**
    * Submission handler
    */
-  onSubmit: (values: Values, formikActions: FormikActions<Values>) => void;
+  onSubmit: (
+    values: Values,
+    formikActions: FormikActions<Values>
+  ) => void | Promise<void>;
   /**
    * A Yup Schema or a function that returns a Yup schema
    */
